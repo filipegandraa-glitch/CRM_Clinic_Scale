@@ -1,0 +1,48 @@
+# DEPLOY NO EASYPANEL A CADA PUSH NA MAIN.
+#
+# Chama o "Gatilho de Implantação" do serviço no EasyPanel (Implantações ›
+# Gatilho de Implantação). O EasyPanel então faz o mesmo que o botão
+# "Implantar": busca o código e sobe a versão nova.
+#
+# A URL do gatilho NÃO entra neste arquivo: quem tem a URL faz deploy. Ela fica
+# no segredo `EASYPANEL_DEPLOY_URL` do repositório (Settings › Secrets and
+# variables › Actions). Sem o segredo, o job termina sem chamar nada — fork que
+# herdar este arquivo não dispara deploy em lugar nenhum.
+#
+# Para disparar à mão: aba Actions › deploy-easypanel › Run workflow.
+name: deploy-easypanel
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch: {}
+
+# Dois pushes seguidos não disputam o mesmo deploy: o mais novo cancela o que
+# ainda está esperando.
+concurrency:
+  group: deploy-easypanel
+  cancel-in-progress: true
+
+permissions: {}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Chamar o gatilho de implantação
+        env:
+          DEPLOY_URL: ${{ secrets.EASYPANEL_DEPLOY_URL }}
+        run: |
+          if [ -z "$DEPLOY_URL" ]; then
+            echo "::warning::Segredo EASYPANEL_DEPLOY_URL não configurado — nada a fazer."
+            exit 0
+          fi
+          status=$(curl -sS -o resposta.txt -w '%{http_code}' --max-time 60 -X POST "$DEPLOY_URL")
+          echo "EasyPanel respondeu HTTP $status"
+          if [ "$status" -lt 200 ] || [ "$status" -ge 300 ]; then
+            echo "::error::O EasyPanel recusou o deploy (HTTP $status)."
+            head -c 500 resposta.txt
+            exit 1
+          fi
+          echo "Deploy de ${GITHUB_SHA::7} pedido ao EasyPanel."
