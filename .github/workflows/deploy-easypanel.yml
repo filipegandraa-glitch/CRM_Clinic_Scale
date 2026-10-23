@@ -1,8 +1,13 @@
-# DEPLOY NO EASYPANEL A CADA PUSH NA MAIN.
+# DEPLOY NO EASYPANEL QUANDO A IMAGEM NOVA DA MAIN FICA PRONTA.
+#
+# A VPS não constrói o app: o `next build` lá morre por falta de memória
+# (exit 137). Quem constrói é o workflow "Publicar imagem Docker (GHCR)", que
+# publica `ghcr.io/<dono>/deskcommcrm:main`; o EasyPanel só puxa essa imagem.
+# Por isso este workflow espera aquele terminar com sucesso — disparar no push
+# faria o EasyPanel puxar a imagem anterior.
 #
 # Chama o "Gatilho de Implantação" do serviço no EasyPanel (Implantações ›
-# Gatilho de Implantação). O EasyPanel então faz o mesmo que o botão
-# "Implantar": busca o código e sobe a versão nova.
+# Gatilho de Implantação), o mesmo que o botão "Implantar".
 #
 # A URL do gatilho NÃO entra neste arquivo: quem tem a URL faz deploy. Ela fica
 # no segredo `EASYPANEL_DEPLOY_URL` do repositório (Settings › Secrets and
@@ -13,11 +18,13 @@
 name: deploy-easypanel
 
 on:
-  push:
+  workflow_run:
+    workflows: ["Publicar imagem Docker (GHCR)"]
+    types: [completed]
     branches: ["main"]
   workflow_dispatch: {}
 
-# Dois pushes seguidos não disputam o mesmo deploy: o mais novo cancela o que
+# Duas imagens seguidas não disputam o mesmo deploy: a mais nova cancela o que
 # ainda está esperando.
 concurrency:
   group: deploy-easypanel
@@ -27,12 +34,19 @@ permissions: {}
 
 jobs:
   deploy:
+    # Só imagem publicada a partir de push na main (PR também roda o workflow
+    # da imagem, mas não publica nada).
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.event == 'push')
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
       - name: Chamar o gatilho de implantação
         env:
           DEPLOY_URL: ${{ secrets.EASYPANEL_DEPLOY_URL }}
+          SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
         run: |
           if [ -z "$DEPLOY_URL" ]; then
             echo "::warning::Segredo EASYPANEL_DEPLOY_URL não configurado — nada a fazer."
@@ -45,4 +59,4 @@ jobs:
             head -c 500 resposta.txt
             exit 1
           fi
-          echo "Deploy de ${GITHUB_SHA::7} pedido ao EasyPanel."
+          echo "Deploy de ${SHA::7} pedido ao EasyPanel."
