@@ -12,6 +12,8 @@ que o `next/font/google` baixava.
 
 | Arquivo | Família | Pesos | Cobertura | Origem (fonts.gstatic.com) |
 |---|---|---|---|---|
+| `hanken-grotesk-100-900-latin.woff2` | Hanken Grotesk — **corpo** (Guia de Marca ClinicScale) | variável 100–900 | latin | `hankengrotesk/v12` |
+| `sora-100-800-latin.woff2` | Sora — **títulos** (Guia de Marca ClinicScale) | variável 100–800 | latin | `sora/v17` |
 | `atkinson-hyperlegible-{400,700}-latin-latin-ext.woff2` | Atkinson Hyperlegible | 400, 700 | latin + latin-ext | `atkinsonhyperlegible/v12` |
 | `ibm-plex-mono-{400,500}-latin-latin-ext.woff2` | IBM Plex Mono | 400, 500 | latin + latin-ext | `ibmplexmono/v20` |
 | `bricolage-grotesque-200-800-latin.woff2` | Bricolage Grotesque | variável 200–800 | latin | `bricolagegrotesque/v9` |
@@ -31,6 +33,7 @@ o bloco `/* latin */` da resposta aponta o arquivo:
 ```bash
 UA='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
 curl -sA "$UA" 'https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap'
+curl -sA "$UA" 'https://fonts.googleapis.com/css2?family=Sora:wght@100..800&family=Hanken+Grotesk:wght@100..900&display=swap'
 ```
 
 As duas de latin + latin-ext vêm num arquivo só por peso: a API CSS antiga,

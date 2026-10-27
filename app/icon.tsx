@@ -1,9 +1,9 @@
 import { ImageResponse } from "next/og";
 
 import { marcaEhADoProduto } from "@/lib/branding";
-import { CORES_DA_MARCA, SIMBOLO } from "@/lib/branding/desenho";
+import { CORES_DA_MARCA, SIMBOLO_EMBUTIDO } from "@/lib/branding/desenho";
 import { letraDoIcone } from "@/lib/branding/icone";
-import { marcaDaSaida, NEUTROS_DE_SAIDA } from "@/lib/branding/saida";
+import { marcaDaSaida } from "@/lib/branding/saida";
 
 /**
  * O ícone da aba, DESENHADO em runtime com a marca da instalação.
@@ -91,15 +91,11 @@ export default async function Icon() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            background: NEUTROS_DE_SAIDA.fundo,
+            background: CORES_DA_MARCA.fundoDoIcone,
           }}
         >
-          <svg viewBox={SIMBOLO.viewBox} width={lado} height={lado}>
-            <g fill={CORES_DA_MARCA.claro.simbolo} transform={SIMBOLO.transform}>
-              <path d={SIMBOLO.d} />
-              <rect {...SIMBOLO.modulo} />
-            </g>
-          </svg>
+          {/* eslint-disable-next-line @next/next/no-img-element -- ImageResponse, não DOM */}
+          <img src={SIMBOLO_EMBUTIDO} alt="" width={lado} height={lado} />
         </div>
       ),
       { ...size, headers: CACHE },

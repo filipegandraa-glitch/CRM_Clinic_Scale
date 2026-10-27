@@ -25,24 +25,24 @@ import type { Regua } from "./contraste";
 
 export const REGUA_DO_PRODUTO: Regua = {
   rampaDoProduto: [
-    "#f3f6f1",
-    "#e4ebe0",
-    "#c8d6c1",
-    "#a4ba9a",
-    "#82a077",
-    "#67885d",
-    "#506d48",
-    "#41573b",
-    "#374731",
-    "#2f3c2b",
-    "#171f15",
+    "#faf6ec",
+    "#f2e8d0",
+    "#e8d9b5",
+    "#dcc594",
+    "#cfb27a",
+    "#c2a063",
+    "#a8874d",
+    "#7e6234",
+    "#614b29",
+    "#463620",
+    "#261d11",
   ],
   claro: {
     nome: "claro",
     base: [
       {
         chave: "--color-bg",
-        hex: "#faf9f6",
+        hex: "#f4efe3",
       },
       {
         chave: "--color-surface",
@@ -50,7 +50,7 @@ export const REGUA_DO_PRODUTO: Regua = {
       },
       {
         chave: "--color-surface-elevated",
-        hex: "#f5f3ee",
+        hex: "#eee7d7",
       },
     ],
     tingidas: [
@@ -69,7 +69,7 @@ export const REGUA_DO_PRODUTO: Regua = {
         tipo: "componente",
         fonte: {
           tipo: "grau",
-          indice: 6,
+          indice: 7,
           alfa: 1,
         },
         contra: null,
@@ -81,14 +81,14 @@ export const REGUA_DO_PRODUTO: Regua = {
           tipo: "frenteCalculada",
           sobre: {
             tipo: "grau",
-            indice: 6,
+            indice: 7,
             alfa: 1,
           },
         },
         contra: [
           {
             tipo: "grau",
-            indice: 6,
+            indice: 7,
             alfa: 1,
           },
         ],
@@ -98,7 +98,7 @@ export const REGUA_DO_PRODUTO: Regua = {
         tipo: "componente",
         fonte: {
           tipo: "grau",
-          indice: 7,
+          indice: 8,
           alfa: 1,
         },
         contra: null,
@@ -108,7 +108,7 @@ export const REGUA_DO_PRODUTO: Regua = {
         tipo: "componente",
         fonte: {
           tipo: "grau",
-          indice: 5,
+          indice: 7,
           alfa: 1,
         },
         contra: null,
@@ -134,7 +134,7 @@ export const REGUA_DO_PRODUTO: Regua = {
         tipo: "componente",
         fonte: {
           tipo: "grau",
-          indice: 5,
+          indice: 7,
           alfa: 1,
         },
         contra: null,
@@ -143,37 +143,37 @@ export const REGUA_DO_PRODUTO: Regua = {
     semanticas: [
       {
         nome: "success",
-        hex: "#5a8a5f",
+        hex: "#1c4a3d",
       },
       {
         nome: "warning",
-        hex: "#b07a2b",
+        hex: "#b07b2e",
       },
       {
         nome: "error",
-        hex: "#a94a3c",
+        hex: "#7a2e27",
       },
       {
         nome: "info",
-        hex: "#4a7a93",
+        hex: "#2e5a66",
       },
     ],
     neutros: [
-      "#faf9f6",
-      "#f3f1ec",
-      "#e7e3da",
-      "#d2cdbf",
-      "#a9a395",
-      "#7d786c",
-      "#5d594f",
-      "#46433b",
-      "#2e2c26",
-      "#1c1a16",
-      "#0e0d0a",
+      "#faf7f0",
+      "#f4efe3",
+      "#e2d9c6",
+      "#cdbfa4",
+      "#a89d86",
+      "#7b7361",
+      "#5c5546",
+      "#433e33",
+      "#2b2820",
+      "#16140f",
+      "#000000",
     ],
     indices: {
-      accent: 6,
-      hover: 7,
+      accent: 7,
+      hover: 8,
       soft: 1,
     },
     alfaDoSoft: 1,
@@ -183,15 +183,15 @@ export const REGUA_DO_PRODUTO: Regua = {
     base: [
       {
         chave: "--color-bg",
-        hex: "#161510",
+        hex: "#000000",
       },
       {
         chave: "--color-surface",
-        hex: "#1d1c17",
+        hex: "#16140f",
       },
       {
         chave: "--color-surface-elevated",
-        hex: "#272620",
+        hex: "#201d16",
       },
     ],
     tingidas: [
@@ -199,8 +199,8 @@ export const REGUA_DO_PRODUTO: Regua = {
         chave: "--color-accent-soft",
         fonte: {
           tipo: "literal",
-          hex: "#82a077",
-          alfa: 0.16,
+          hex: "#c2a063",
+          alfa: 0.14,
         },
       },
     ],
@@ -210,7 +210,7 @@ export const REGUA_DO_PRODUTO: Regua = {
         tipo: "componente",
         fonte: {
           tipo: "grau",
-          indice: 4,
+          indice: 5,
           alfa: 1,
         },
         contra: null,
@@ -222,14 +222,14 @@ export const REGUA_DO_PRODUTO: Regua = {
           tipo: "frenteCalculada",
           sobre: {
             tipo: "grau",
-            indice: 4,
+            indice: 5,
             alfa: 1,
           },
         },
         contra: [
           {
             tipo: "grau",
-            indice: 4,
+            indice: 5,
             alfa: 1,
           },
         ],
@@ -239,7 +239,7 @@ export const REGUA_DO_PRODUTO: Regua = {
         tipo: "componente",
         fonte: {
           tipo: "grau",
-          indice: 3,
+          indice: 4,
           alfa: 1,
         },
         contra: null,
@@ -284,39 +284,39 @@ export const REGUA_DO_PRODUTO: Regua = {
     semanticas: [
       {
         nome: "success",
-        hex: "#82a077",
+        hex: "#3f9175",
       },
       {
         nome: "warning",
-        hex: "#d09455",
+        hex: "#b07b2e",
       },
       {
         nome: "error",
-        hex: "#c87263",
+        hex: "#c96a5c",
       },
       {
         nome: "info",
-        hex: "#7da9bf",
+        hex: "#5a93a1",
       },
     ],
     neutros: [
-      "#f5f4ef",
-      "#e6e4dc",
-      "#bbb8ac",
-      "#8e8b7f",
-      "#605e54",
-      "#444239",
-      "#33312a",
-      "#272620",
-      "#1d1c17",
-      "#161510",
-      "#0c0b08",
+      "#f4efe3",
+      "#e6dfcf",
+      "#c9c0ac",
+      "#b3ab98",
+      "#878070",
+      "#3d3729",
+      "#2a261c",
+      "#201d16",
+      "#16140f",
+      "#0b0a07",
+      "#000000",
     ],
     indices: {
-      accent: 4,
-      hover: 3,
+      accent: 5,
+      hover: 4,
       soft: null,
     },
-    alfaDoSoft: 0.16,
+    alfaDoSoft: 0.14,
   },
 } as const;

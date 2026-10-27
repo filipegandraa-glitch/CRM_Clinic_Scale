@@ -21,15 +21,22 @@ type ThemeContextValue = {
 
 const ThemeContext = React.createContext<ThemeContextValue | null>(null);
 
+/**
+ * Sem preferência salva, o tema é o ESCURO: dourado sobre preto é a versão
+ * preferencial da marca ClinicScale. Tem de casar com o `THEME_INIT_SCRIPT` de
+ * `app/layout.tsx`, que pinta o primeiro frame antes do React existir.
+ */
+export const TEMA_PADRAO: Theme = "dark";
+
 function readStoredTheme(): Theme {
-  if (typeof window === "undefined") return "system";
+  if (typeof window === "undefined") return TEMA_PADRAO;
   try {
     const v = window.localStorage.getItem(STORAGE_KEY);
     if (v === "light" || v === "dark" || v === "system") return v;
   } catch {
     // localStorage indisponível (modo privado, sandbox) — segue com default.
   }
-  return "system";
+  return TEMA_PADRAO;
 }
 
 function getSystemTheme(): ResolvedTheme {
@@ -78,7 +85,7 @@ function getTemaSnapshot(): Theme {
   return temaEmCache;
 }
 function getTemaSnapshotDoServidor(): Theme {
-  return "system";
+  return TEMA_PADRAO;
 }
 function inscreverEmTema(ouvinte: Ouvinte): () => void {
   ouvintesDeTema.add(ouvinte);

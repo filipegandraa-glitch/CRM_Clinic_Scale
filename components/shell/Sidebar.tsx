@@ -174,7 +174,7 @@ export function SidebarContent({
           collapsed ? (
             <SimboloDoProduto nome={nome} className="h-8 w-8" />
           ) : (
-            <LogotipoDoProduto nome={nome} className="h-8 w-auto" />
+            <LogotipoDoProduto nome={nome} className="h-11 w-auto" />
           )
         ) : (
           <span className={cn("font-semibold tracking-tight", collapsed && "sr-only")}>{nome}</span>
@@ -252,7 +252,7 @@ export function SidebarContent({
                     type="button"
                     onClick={() => toggleGrupo(group.id)}
                     aria-expanded={aberto}
-                    className="flex w-full items-center justify-between rounded-md px-3 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent/40 hover:text-foreground"
+                    className="flex w-full items-center justify-between rounded-md px-3 py-1 text-[11px] font-medium tracking-[0.18em] text-accent uppercase transition-colors hover:bg-accent-soft"
                   >
                     {t(group.label)}
                     <CaretDown
@@ -285,9 +285,11 @@ export function SidebarContent({
                           onClick={onNavigate}
                           className={cn(
                             "relative flex items-center gap-3 rounded-md px-3 py-1 text-sm transition-colors",
+                            // Dourado com parcimônia (guia de marca): o item ativo ganha
+                            // o tom suave e um filete dourado, não um bloco chapado.
                             isActive
-                              ? "bg-accent text-accent-foreground"
-                              : "text-muted-foreground hover:bg-accent/50 hover:text-foreground",
+                              ? "bg-accent-soft font-medium text-accent before:absolute before:inset-y-1 before:left-0 before:w-0.5 before:rounded-full before:bg-accent"
+                              : "text-muted-foreground hover:bg-accent-soft hover:text-foreground",
                             collapsed && "justify-center px-2",
                           )}
                         >
@@ -312,10 +314,10 @@ export function SidebarContent({
                         aria-current={pathname === group.hub.href ? "page" : undefined}
                         onClick={onNavigate}
                         className={cn(
-                          "flex items-center gap-3 rounded-md px-3 py-1 text-sm transition-colors",
+                          "relative flex items-center gap-3 rounded-md px-3 py-1 text-sm transition-colors",
                           pathname === group.hub.href
-                            ? "bg-accent text-accent-foreground"
-                            : "text-muted-foreground hover:bg-accent/50 hover:text-foreground",
+                            ? "bg-accent-soft font-medium text-accent before:absolute before:inset-y-1 before:left-0 before:w-0.5 before:rounded-full before:bg-accent"
+                            : "text-muted-foreground hover:bg-accent-soft hover:text-foreground",
                           collapsed && "justify-center px-2",
                         )}
                       >

@@ -21,7 +21,16 @@ import {
 } from "@/lib/branding/rampa";
 
 const RAIZ = process.cwd();
-const CSS = fs.readFileSync(path.join(RAIZ, "app/globals.css"), "utf8");
+// FORK CLINICSCALE: o motor de derivação de marca (`rampaDeSemente`,
+// `derivarMarca`, a reconciliação de semânticas) foi calibrado contra o design
+// system Sage do upstream, e os números medidos abaixo são DESSE design system.
+// A paleta do produto aqui passou a ser a ClinicScale (Guia de Marca V1.0),
+// desenhada à mão — não sai de uma semente —, então a calibração do motor lê
+// a cópia congelada do `globals.css` do upstream em `tests/fixtures/`. A paleta
+// ClinicScale viva é medida por `branding-regua-do-produto.test.ts` (régua ==
+// folha) e por `branding-pares-pintados.test.ts` (todo par pintado, toda
+// semente, acima do piso).
+const CSS = fs.readFileSync(path.join(RAIZ, "tests/fixtures/globals-sage-upstream.css"), "utf8");
 
 /**
  * Os stops esperados saem do CSS, NÃO de uma cópia colada aqui.

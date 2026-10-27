@@ -278,7 +278,10 @@ describe("o que a derivação move e o CSS ainda não emite", () => {
     // O par com rótulo: a derivação DIZ que girou `--color-success`; se o CSS
     // não a emite, o log precisa dizer isso também — senão o motivo descreve um
     // movimento que a tela não faz.
-    const cor = corDe("#22c55e");
+    // `#1c4a3d` (o Verde Escala do guia ClinicScale como accent) colide com o
+    // esmeralda de `--color-success`; o `#22c55e` desta linha colidia com a
+    // Sage do upstream e, sobre a paleta ClinicScale, não move nada.
+    const cor = corDe("#1c4a3d");
     const movidas = (cor.derivada?.motivos ?? []).filter(
       (m) => m.codigo === "semantica_deslocada",
     );

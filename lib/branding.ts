@@ -16,7 +16,12 @@
  * runtime em vez de lida do bundle.
  */
 
-export const DEFAULT_APP_NAME = "DeskcommCRM";
+/**
+ * Este repositório é o fork ClinicScale do DeskcommCRM: a marca padrão do
+ * produto AQUI é a ClinicScale (Guia de Marca V1.0), de propósito. Não envie
+ * esta linha de volta ao upstream.
+ */
+export const DEFAULT_APP_NAME = "ClinicScale";
 
 export type Branding = {
   /** Nome exibido na interface e nos títulos de página. */

@@ -3,7 +3,7 @@ import { ImageResponse } from "next/og";
 import { marcaEhADoProduto } from "@/lib/branding";
 import { logger } from "@/lib/logger";
 
-import { CORES_DA_MARCA, SIMBOLO } from "./desenho";
+import { CORES_DA_MARCA, SIMBOLO_EMBUTIDO } from "./desenho";
 import { letraDoIcone } from "./icone";
 import {
   baseDoStorage,
@@ -66,7 +66,11 @@ export async function gerarIconeDoApp(
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: imagem || produto ? NEUTROS_DE_SAIDA.fundo : marca.accent,
+          background: imagem
+            ? NEUTROS_DE_SAIDA.fundo
+            : produto
+              ? CORES_DA_MARCA.fundoDoIcone
+              : marca.accent,
           color: marca.accentFg,
           fontSize: Math.round(lado * 0.62),
         }}
@@ -76,16 +80,13 @@ export async function gerarIconeDoApp(
           // eslint-disable-next-line @next/next/no-img-element
           <img src={imagem} alt="" width={lado} height={lado} style={{ objectFit: "contain" }} />
         ) : produto ? (
-          <svg
-            viewBox={SIMBOLO.viewBox}
+          // eslint-disable-next-line @next/next/no-img-element -- ImageResponse, não DOM
+          <img
+            src={SIMBOLO_EMBUTIDO}
+            alt=""
             width={Math.round(lado * 0.78)}
             height={Math.round(lado * 0.78)}
-          >
-            <g fill={CORES_DA_MARCA.claro.simbolo} transform={SIMBOLO.transform}>
-              <path d={SIMBOLO.d} />
-              <rect {...SIMBOLO.modulo} />
-            </g>
-          </svg>
+          />
         ) : (
           (letraDoIcone(marca.nome) ?? "")
         )}

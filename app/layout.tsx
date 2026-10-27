@@ -30,15 +30,25 @@ import "./globals.css";
 
 // Fontes versionadas em app/fonts/ (origem e licença no README de lá): o
 // next/font/google as baixava durante o build, e o build caía quando o Google
-// não respondia. A família passa a se chamar como a variável JS ("atkinson"),
-// então use sempre a custom property (--font-atkinson), nunca o nome da fonte.
-const atkinson = localFont({
-  src: [
-    { path: "./fonts/atkinson-hyperlegible-400-latin-latin-ext.woff2", weight: "400", style: "normal" },
-    { path: "./fonts/atkinson-hyperlegible-700-latin-latin-ext.woff2", weight: "700", style: "normal" },
-  ],
+// não respondia. A família passa a se chamar como a variável JS ("hanken",
+// "sora"), então use sempre a custom property (--font-hanken, --font-sora),
+// nunca o nome da fonte.
+//
+// Tipografia do Guia de Marca ClinicScale V1.0: Hanken Grotesk no corpo
+// (400 leitura, 500, 700 ênfase) e Sora nos títulos (200 elegância, 400, 700
+// impacto). As duas são variáveis, então um arquivo cobre todos os pesos.
+const hanken = localFont({
+  src: "./fonts/hanken-grotesk-100-900-latin.woff2",
+  weight: "100 900",
   display: "swap",
-  variable: "--font-atkinson",
+  variable: "--font-hanken",
+});
+
+const sora = localFont({
+  src: "./fonts/sora-100-800-latin.woff2",
+  weight: "100 800",
+  display: "swap",
+  variable: "--font-sora",
 });
 
 const plexMono = localFont({
@@ -122,7 +132,9 @@ export const viewport: Viewport = {
 
 // Inline FOUC-prevention. Conteúdo é string literal estática (zero input do usuário),
 // portanto seguro. Lê localStorage + prefers-color-scheme antes do primeiro paint.
-const THEME_INIT_SCRIPT = `(function(){try{var s=localStorage.getItem('deskcomm-theme');var d=window.matchMedia('(prefers-color-scheme: dark)').matches;var r=(s==='dark'||s==='light')?s:((s==='system'||!s)&&d?'dark':'light');document.documentElement.setAttribute('data-theme',r);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();`;
+// Sem preferência salva, o tema é o ESCURO: dourado sobre preto é a versão
+// preferencial da marca. "system" continua seguindo o sistema operacional.
+const THEME_INIT_SCRIPT = `(function(){try{var s=localStorage.getItem('deskcomm-theme');var d=window.matchMedia('(prefers-color-scheme: dark)').matches;var r=(s==='dark'||s==='light')?s:(s==='system'?(d?'dark':'light'):'dark');document.documentElement.setAttribute('data-theme',r);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();`;
 
 /**
  * Motivos já registrados neste processo. `EstiloDaMarca` roda em TODA
@@ -293,9 +305,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html
       lang="pt-BR"
-      data-theme="light"
+      data-theme="dark"
       suppressHydrationWarning
-      className={`${atkinson.variable} ${plexMono.variable}`}
+      className={`${hanken.variable} ${sora.variable} ${plexMono.variable}`}
     >
       <head>
         {/* Primeiro de tudo: a cor da instalação, antes do CSS e do script de tema. */}
